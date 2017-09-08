@@ -1,10 +1,10 @@
 class Station
-  def initialize(station)
-    @station = station
+  def initialize(name, zone)
+    @station = { :name => name, :zone => zone }
   end
 
   def name
-    @station[:station]
+    @station[:name]
   end
 
   def zone

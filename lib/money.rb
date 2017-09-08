@@ -11,15 +11,13 @@ class Money
     @balance = 0
   end
 
-  def pay_in(num)
+  def top_up(num)
+    fail "Exceeded maximum balance of $#{MAXIMUM_BALANCE}" if over_limit?(num)
     deduct(-num)
   end
 
   def touch_in_check
     fail "Balance is below the minimum of $#{MINIMUM_BALANCE}" if not_enough?
-
-  def top_up_check(num)
-    fail "Exceeded maximum balance of $#{MAXIMUM_BALANCE}" if over_limit?(num)
   end
 
   def penalty
@@ -34,7 +32,9 @@ class Money
   private
 
   def calculator(journey)
-
+    entry_station = journey[:entry_station]
+    exit_station = journey[:exit_station]
+    1 + (exit_station.zone - entry_station.zone).abs
   end
 
   def deduct(num)

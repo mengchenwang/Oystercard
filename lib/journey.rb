@@ -7,18 +7,13 @@ class Journey
   end
 
   def leave(station)
-    @exit_station = station
     @journey = { :entry_station => @entry_station,
-                 :exit_station => @exit_station }
+                 :exit_station => station }
     @entry_station = nil
   end
 
-  def did_not_touch_out?
-    @entry_station != nil
-  end
-
-  def did_not_touch_in?
-    @entry_station == nil
+  def in_journey?
+    !!@entry_station
   end
 
   def complete?
